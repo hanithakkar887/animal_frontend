@@ -193,6 +193,11 @@
     display: flex;
 }
 
+
+
+
+
+
     </style>
 </head>
 <body>
@@ -359,8 +364,8 @@ function deleteAnimal(index, category) {
 }
 
 
-function addAnimal() {
-    // e.preventDefault()
+function addAnimal(e) {
+    e.preventDefault()
     const newAnimal = {
         name: document.getElementById("newName").value,
         species: document.getElementById("newSpecies").value,
