@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Data</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            font-size: 28px;
+            background: linear-gradient(45deg, #ff7e5f, #feb47b);
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .category {
+            margin: 40px auto;
+            padding: 20px;
+            background: #1e1e1e;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(255, 126, 95, 0.3);
+            max-width: 1200px;
+        }
+
+        .category h2 {
+            text-align: center;
+            font-size: 26px;
+            text-transform: uppercase;
+            color: #ff7e5f;
+            margin-bottom: 20px;
+        }
+
+        .animals {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .animal-card {
+            background: #252525;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 4px 10px rgba(255, 126, 95, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .animal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(255, 126, 95, 0.5);
+        }
+
+        .animal-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .animal-details {
+            flex-grow: 1;
+        }
+
+        .animal-details h3 {
+            font-size: 20px;
+            margin: 5px 0;
+            color: #feb47b;
+        }
+
+        .animal-details p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 8px 12px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        .edit-btn {
+            background-color: #ffcc00;
+            color: #121212;
+        }
+
+        .delete-btn {
+            background-color: #ff4444;
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(255, 126, 95, 0.5);
+            width: 90%;
+            max-width: 400px;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .modal input {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            background: #252525;
+            color: white;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .close-btn {
+            background-color: #ff4444;
+            color: white;
+        }
+
+        .save-btn {
+            background-color: #00cc66;
+            color: white;
+        }
+        
+
+
+#add-animal-form input, #add-animal-form select {
+    width: 100%;
+    margin: 5px 0;
+    padding: 8px;
+}
+
+.btn {
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+}
+
+.save-btn {
+    background: green;
+    color: white;
+}
+
+#add-animal-form {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background: #252525;
+    padding: 15px;
+    border-radius: 8px;
+    width: 300px;
+    margin: 20px auto;
+    box-shadow: 0 4px 10px rgba(255, 126, 95, 0.3);
+}
+#add-animal-form {
+    display: none;
+}
+#add-animal-form {
+    display: flex;
+}
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+
+    <header> Animal Encyclopedia    </header>
+    <button class="btn save-btn" onclick="toggleForm()">Show/Hide Form</button>
+
+
+    <div id="animal-container"></div>
+    <div id="add-animal-form">
+        <h2>Add New Animal</h2>
+        <input type="text" id="newName" placeholder="Enter Animal Name">
+        <input type="text" id="newSpecies" placeholder="Enter Species">
+        <input type="text" id="newSize" placeholder="Enter Size">
+        <input type="text" id="newLocation" placeholder="Enter Location">
+        <input type="text" id="newImage" placeholder="Enter Image URL (optional)">
+        <select id="newCategory">
+            <option value="BIGCATS">Big Cats</option>
+            <option value="DOGS">Dogs</option>
+            <option value="BIGFISH">Big Fish</option>
+        </select>
+        <button class="btn save-btn" onclick="addAnimal()">Add Animal</button>
+    </div>
+
+    <!-- Update Modal -->
+    <div id="updateModal" class="modal">
+        <h3>Edit Animal</h3>
+        <input type="text" id="editName" placeholder="Name">
+        <input type="text" id="editSpecies" placeholder="Species">
+        <input type="text" id="editSize" placeholder="Size">
+        <input type="text" id="editLocation" placeholder="Location">
+        <input type="text" id="editImage" placeholder="Image URL">
+        <div class="modal-buttons">
+            <button class="btn close-btn" onclick="closeModal()">Close</button>
+            <button class="btn save-btn" onclick="saveChanges()">Save</button>
+        </div>
+        
+    </div>
+
+    <script>
+
+
+class AnimalDataLoader {
+    constructor(files) {
+        this.files = files;
+        this.container = document.getElementById("animal-container");
+        this.animalData = {};
+    }
+
+    async loadData() {
+        for (const file of this.files) {
+            try {
+                const response = await fetch(file);
+                const data = await response.json();
+                const category = this.formatCategory(file);
+                this.animalData[category] = data;
+                this.displayAnimals(category);
+            } catch (error) {
+                console.error(`Error loading ${file}:`, error);
+            }
+        }
+    }
+
+    formatCategory(file) {
+        return file.split("/").pop().split(".")[0].replace("_", " ").toUpperCase();
+    }
+
+    displayAnimals(category) {
+        const categoryDiv = document.createElement("div");
+        categoryDiv.classList.add("category");
+
+        const heading = document.createElement("h2");
+        heading.textContent = category;
+        categoryDiv.appendChild(heading);
+
+        const animalContainer = document.createElement("div");
+        animalContainer.classList.add("animals");
+
+        this.animalData[category].forEach((animal, index) => {
+            const animalCard = document.createElement("div");
+            animalCard.classList.add("animal-card");
+            animalCard.setAttribute("data-index", index);
+            animalCard.setAttribute("data-category", category);
+
+            animalCard.innerHTML = `
+                <img src="${animal.image}" alt="${animal.name}">
+                <div class="animal-details">
+                    <h3>${animal.name}</h3>
+                    <p><strong>Species:</strong> ${animal.species}</p>
+                    <p><strong>Size:</strong> ${animal.size}</p>
+                    <p><strong>Location:</strong> ${animal.location}</p>
+                    <div class="buttons">
+                        <button class="btn edit-btn" onclick="openModal(${index}, '${category}')">Edit</button>
+                        <button class="btn delete-btn" onclick="deleteAnimal(${index}, '${category}')">Delete</button>
+                    </div>
+                </div>
+            `;
+            animalContainer.appendChild(animalCard);
+        });
+
+        categoryDiv.appendChild(animalContainer);
+        this.container.appendChild(categoryDiv);
+    }
+}
+
+let loader;
+
+document.addEventListener("DOMContentLoaded", () => {
+    const jsonFiles = ["bigcats.json", "dogs.json", "bigfish.json"];
+    loader = new AnimalDataLoader(jsonFiles);
+    loader.loadData();
+});
+
+let currentCategory = null;
+let currentIndex = null;
+
+function openModal(index, category) {
+    currentCategory = category;
+    currentIndex = index;
+    const animal = loader.animalData[category][index];
+
+    document.getElementById("editName").value = animal.name;
+    document.getElementById("editSpecies").value = animal.species;
+    document.getElementById("editSize").value = animal.size;
+    document.getElementById("editLocation").value = animal.location;
+    document.getElementById("editImage").value = animal.image;
+
+    document.getElementById("updateModal").style.display = "flex";
+}
+
+function closeModal() {
+    document.getElementById("updateModal").style.display = "none";
+}
+
+
+function saveChanges() {
+    if (currentCategory !== null && currentIndex !== null) {
+        loader.animalData[currentCategory][currentIndex] = {
+            name: document.getElementById("editName").value,
+            species: document.getElementById("editSpecies").value,
+            size: document.getElementById("editSize").value,
+            location: document.getElementById("editLocation").value,
+            image: document.getElementById("editImage").value
+        };
+
+        document.getElementById("animal-container").innerHTML = ""; 
+        for (const category in loader.animalData) {
+            loader.displayAnimals(category);
+        }
+    }
+    closeModal();
+}
+
+
+
+
+
+function deleteAnimal(index, category) {
+    loader.animalData[category].splice(index, 1);
+    document.getElementById("animal-container").innerHTML = "";
+    for (const category in loader.animalData) {
+        loader.displayAnimals(category);
+    }
+}
+
+
+function addAnimal(e) {
+    e.preventDefault()
+    const newAnimal = {
+        name: document.getElementById("newName").value,
+        species: document.getElementById("newSpecies").value,
+        size: document.getElementById("newSize").value,
+        location: document.getElementById("newLocation").value,
+        image: document.getElementById("newImage").value || "https://via.placeholder.com/150" // Default image
+    };
+
+    const category = document.getElementById("newCategory").value;
+
+    if (!loader.animalData[category]) {
+        loader.animalData[category] = [];
+    }
+
+    loader.animalData[category].push(newAnimal);
+
+    document.getElementById("animal-container").innerHTML = "";
+    for (const category in loader.animalData) {
+        loader.displayAnimals(category);
+    }
+
+    // Clear input fields after adding an animal
+    document.getElementById("newName").value = "";
+    document.getElementById("newSpecies").value = "";
+    document.getElementById("newSize").value = "";
+    document.getElementById("newLocation").value = "";
+    document.getElementById("newImage").value = "";
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("add-animal-form").style.display = "flex"; 
+});
+function toggleForm() {
+    let form = document.getElementById("add-animal-form");
+    if (form.style.display === "none" || form.style.display === "") {
+        form.style.display = "flex";
+    } else {
+        form.style.display = "none";
+    }
+}
+
+
+
+
+    </script>
+
+</body>
+</html>
+
+
+

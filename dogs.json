@@ -1,0 +1,14 @@
+[
+    { "species": "Dog", "name": "Rottweiler", "size": "2 ft", "location": "Germany", "image":"https://tse2.mm.bing.net/th?id=OIP.XU8AMLP5t-8efN0MF-mFMAHaE8&pid=Api&P=0&h=180" },
+    { "species": "Dog", "name": "German Shepherd", "size": "2 ft", "location": "Germany", "image": "https://tse4.mm.bing.net/th?id=OIP._fvPBWzOnpgh0Xkjd3xwCQHaE8&pid=Api&P=0&h=180" },
+    { "species": "Dog", "name": "Labrador", "size": "2 ft", "location": "UK", "image": "https://tse1.mm.bing.net/th?id=OIP.I_3ZP1qdEzejMJxWwmaoEQHaE7&pid=Api&P=0&h=180" },
+    { "species": "Dog", "name": "Alabai", "size": "4 ft", "location": "Turkey", "image": "https://tse4.mm.bing.net/th?id=OIP.cRVEFqNDoFq9EwPoUIAMyQHaE8&pid=Api&P=0&h=180" },
+    { "species": "Dog", "name": "Golden Retriever", "size": "2.5 ft", "location": "Scotland", "image": "https://tse4.mm.bing.net/th?id=OIP.lVnIofKncHMIviKy7aWTvAHaE8&pid=Api&P=0&h=180" },
+    { "species": "Dog", "name": "Doberman", "size": "2.5 ft", "location": "Germany", "image": "https://tse4.mm.bing.net/th?id=OIP.ciel46rf6tltp0PMquUWFQHaFI&pid=Api&P=0&h=180" },
+    { "species": "Dog", "name": "Bulldog", "size": "1.5 ft", "location": "UK", "image": "https://tse4.mm.bing.net/th?id=OIP.Oh9tp29wA4727Yesh5AKegHaGr&pid=Api&P=0&h=180" },
+    { "species": "Dog", "name": "Poodle", "size": "1.5 ft", "location": "France", "image": "https://tse4.mm.bing.net/th?id=OIP.edXICVUEw3TCda6ltj6cAwHaFL&pid=Api&P=0&h=180" },
+    { "species": "Dog", "name": "Saint Bernard", "size": "3 ft", "location": "Switzerland", "image": "https://tse2.mm.bing.net/th?id=OIP.dtQy9jygpIJjMEPlaymdcQHaD3&pid=Api&P=0&h=180" },
+    { "species": "Dog", "name": "Great Dane", "size": "3.5 ft", "location": "Germany", "image": "https://tse2.mm.bing.net/th?id=OIP.Jup_xQHwEu21Do3x6EJdUwHaLH&pid=Api&P=0&h=180" },
+    { "species": "Dog", "name": "Siberian Husky", "size": "2 ft", "location": "Siberia", "image": "https://tse4.mm.bing.net/th?id=OIP.CLCqkB7LRRT2KTczLVFtTAHaE9&pid=Api&P=0&h=180" }
+  ]
+  
